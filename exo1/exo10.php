@@ -5,7 +5,7 @@ function factoriel($nombre) {
      return 1; 
      return ($nombre * factoriel($nombre - 1)); 
    }
-echo "le factoriel de ".$nombre." est: ".factoriel($nombre);
+echo "le factoriel de ".$nombre." est: ".factoriel($nombre) ."\n";
 
 
 
