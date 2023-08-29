@@ -2,17 +2,17 @@
 // 1.	Saisir un tableau de X valeurs entières avec invite variable et contrôle de type
 // i.	Saisir les valeurs d’un tableau jusqu’à ce que l’utilisateur saisisse 0.
 // afficher le tableau trié
-function CreerTableauAvecInvite($invite) {
-    $tab = [];
-    do {
-        $nombre = saisirEntier($invite);
-        $tab[] = $nombre;
-    } while ($nombre != 0);
-    array_pop($tab);
-    trierTableau($tab);
-    afficherTableau($tab);
-    return $tab;
-}
+// function CreerTableauAvecInvite($invite){
+//     $tab = [];
+//     do {
+//         $nombre = saisirEntier($invite);
+//         $tab[] = $nombre;
+//     } while ($nombre != 0);
+//     array_pop($tab);
+//     $proposerTrie = readline("Entrez le trie souhaité : 1 pour croissant , 2 pour décroissant, 3 pour aléatoire : ");
+//     afficherTableau(trierTableau($tab,$proposerTrie));
+//     return $tab;
+// }
 
 // CreerTableauAvecInvite($invite=readline("Entrez un nombre : "));
 
@@ -24,53 +24,41 @@ $chiffre = saisirEntier("entrez longueur axe Y : ", true );
 
 function tableau2D ($lettre, $chiffre) {
     $tabX = tabAlphabet();
-    for ($i = 1; $i <= $lettre; $i++) {
-        $tabY[] = $i;
-    }
     traits($lettre);
-    
     echo "|";
+    echo "  " ." |";
     for ($i = 0; $i < $lettre; $i++) {
+        $tabY[] = $i;
         count($tabX);
         $x = $i % count($tabX);
         echo " " .  $tabX[$x] . " |";
     }
-    for ($i = 1; $i < $chiffre; $i++) {
+    for ($i = 0; $i < $chiffre; $i++) {
         echo "\n";
         traits($lettre);
         echo  "|";
-        for ($j = 0; $j < $lettre; $j++) {
-            $y = $j % count($tabY);
-            echo " " .  $tabY[$y] . " |";
-        }
+        echo " " . $tabY[$i] . " |";
     }
+    $recherche = readline("Entrez un chiffre recherché : ");
+    $position = array_search($recherche, $tabY);
+    echo $position;
+
 }
+tableau2D($lettre, $chiffre);
 
-// 4.	Rechercher une valeur dans un tableau
-function RechercheValeurDansTableau2D($tabX, $tabY, $valeur, $lettre, $chiffre) {
-    tableau2D($lettre, $chiffre);
-    $i = 0;
-    $j = 0;
-    while ($i < count($tabX) && $tabX[$i] != $valeur) {
-        $i++;
-    }
-    while ($j < count($tabY) && $tabY[$j] != $valeur) {
-        $j++;
-    }
-    if ($i < count($tabX) && $j < count($tabY)) {
-        echo "la valeur se trouve en " . $tabX[$i] . $tabY[$j] . "\n";
-    } else {
-        echo "la valeur ne se trouve pas dans le tableau \n";
-    }
-}
-
-
-RechercheValeurDansTableau2D($tabX, $tabY, $valeur);
 
 // toutes les fonctions utilisées dans les exercices précédents
-function trierTableau($tab) {
-    shuffle($tab);
-    return $tab;
+function trierTableau($tab,$proposerTrie) {
+    if ($proposerTrie == 1) {
+        sort($tab);
+        return $tab;
+    } elseif ($proposerTrie == 2) {
+        rsort($tab);
+        return $tab;
+    } elseif ($proposerTrie == 3) {
+        shuffle($tab);
+        return $tab;
+    }
 }
 
 

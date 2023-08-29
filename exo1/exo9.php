@@ -1,14 +1,28 @@
 <?php
-$tab2 = ["un" => 1 , "deux" => 2 , "trois" => 3 , "quatre" => 4 ];
+$tab2 = ["a" => 1 , "b" => 2 , "c" => 3 , "d" => 4 ];
+$recherche = readline("Entrez un chiffre recherché : ");
+$key = array_search($recherche, $tab2);
+echo $key ."\n";
 
-$key = array_search(1, $tab2);
-echo $key;
+$proposerTrie = readline("Entrez le trie souhaité : 1 pour croissant par la clé , 2 pour décroissant par la clé, 3 pour par la valeur : ");
 
-
-shuffle($tab2);
-foreach ($tab2 as $key => $value) {
-    echo $value;
+function trierTableau($tab2,$proposerTrie) {
+    if ($proposerTrie == 1) {
+        ksort($tab2);
+        return $tab2;
+    } elseif ($proposerTrie == 2) {
+        krsort($tab2);
+        return $tab2;
+    } elseif ($proposerTrie == 3) {
+        arsort($tab2);
+        return $tab2;
+    }
 }
-
+function afficherTableau($tab2) {
+    foreach ($tab2 as $key => $value) {
+        echo "$key = $value" . "\n";
+    }
+}
+afficherTableau(trierTableau($tab2,$proposerTrie));
 
 
