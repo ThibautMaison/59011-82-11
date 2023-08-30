@@ -1,8 +1,9 @@
 <?php
 $tab2 = ["a" => 1 , "b" => 2 , "c" => 3 , "d" => 4 ];
 $recherche = readline("Entrez un chiffre recherché : ");
-$key = array_search($recherche, $tab2);
-echo $key ."\n";
+foreach(array_keys($tab2) as $key) {
+    echo $key . "\n";
+}
 
 $proposerTrie = readline("Entrez le trie souhaité : 1 pour croissant par la clé , 2 pour décroissant par la clé, 3 pour par la valeur : ");
 

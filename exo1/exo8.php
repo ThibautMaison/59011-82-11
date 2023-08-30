@@ -1,89 +1,110 @@
 <?php
-// 1.	Saisir un tableau de X valeurs entières avec invite variable et contrôle de type
-// i.	Saisir les valeurs d’un tableau jusqu’à ce que l’utilisateur saisisse 0.
-// afficher le tableau trié
-// function CreerTableauAvecInvite($invite){
-//     $tab = [];
-//     do {
-//         $nombre = saisirEntier($invite);
-//         $tab[] = $nombre;
-//     } while ($nombre != 0);
-//     array_pop($tab);
-//     $proposerTrie = readline("Entrez le trie souhaité : 1 pour croissant , 2 pour décroissant, 3 pour aléatoire : ");
-//     afficherTableau(trierTableau($tab,$proposerTrie));
-//     return $tab;
-// }
+function CreerTableauAvecInvite($invite) {
+    $tab = [];
+    do {
+        $nombre = saisirEntier($invite);
+        if ($nombre != 0) {
+            $tab[] = $nombre;
+        }
+    } while ($nombre != 0);
 
-// CreerTableauAvecInvite($invite=readline("Entrez un nombre : "));
+    $proposerTrie = readline("Entrez le tri souhaité : 1 pour croissant, 2 pour décroissant, 3 pour aléatoire : ");
+    afficherTableau(trierTableau($tab, $proposerTrie));
 
-// 3.	Saisir un tableau à 2 dimensions de X valeurs par Y (X et Y passer en paramètre) et 
-// Afficher un tableau à 2 dimensions sous forme de plateau de jeu ; c’est-à-dire avec les traits de ligne et colonnes, les entêtes de colonnes seront des lettres, chiffres pour les lignes
-
-$lettre = saisirEntier("entrez longueur axe X : ", true );
-$chiffre = saisirEntier("entrez longueur axe Y : ", true );
-
-function tableau2D ($lettre, $chiffre) {
-    $tabX = tabAlphabet();
-    traits($lettre);
-    echo "|";
-    echo "  " ." |";
-    for ($i = 0; $i < $lettre; $i++) {
-        $tabY[] = $i;
-        count($tabX);
-        $x = $i % count($tabX);
-        echo " " .  $tabX[$x] . " |";
-    }
-    for ($i = 0; $i < $chiffre; $i++) {
-        echo "\n";
-        traits($lettre);
-        echo  "|";
-        echo " " . $tabY[$i] . " |";
-    }
-    $recherche = readline("Entrez un chiffre recherché : ");
-    $position = array_search($recherche, $tabY);
-    echo $position;
-
-}
-tableau2D($lettre, $chiffre);
-
-
-// toutes les fonctions utilisées dans les exercices précédents
-function trierTableau($tab,$proposerTrie) {
-    if ($proposerTrie == 1) {
-        sort($tab);
-        return $tab;
-    } elseif ($proposerTrie == 2) {
-        rsort($tab);
-        return $tab;
-    } elseif ($proposerTrie == 3) {
-        shuffle($tab);
-        return $tab;
-    }
+    return $tab;
 }
 
-
-function saisirEntier($invite,bool $positif=false) {
+function saisirEntier($invite, bool $positif = false) {
     do {
         $nombre = readline($invite);
+        if (!preg_match('/^(-)?[0-9]+$/', $nombre) || ($positif && $nombre < 0)) {
+            echo "Veuillez entrer un nombre entier";
+            echo ".\n";
+        }
     } while (!preg_match('/^(-)?[0-9]+$/', $nombre) || ($positif && $nombre < 0));
+    
     return $nombre;
 }
 
-function afficherTableau($tab) {
-    foreach ($tab as $value) {
-        echo $value . "\n";
+function afficherTableau($tableau) {
+    foreach ($tableau as $valeur) {
+        echo $valeur . ' ';
     }
+    echo "\n";
 }
-function tabAlphabet()
-{
-    foreach (range('A', 'Z') as $i) {
-        $tab[] = $i;
+
+function trierTableau($tableau, $typeTri) {
+    switch ($typeTri) {
+        case 1:
+            sort($tableau);
+            break;
+        case 2:
+            rsort($tableau);
+            break;
+        case 3:
+            shuffle($tableau);
+            break;
+        default:
+            echo "Tri non reconnu.\n";
     }
-    return $tab;
+    return $tableau;
 }
-function traits($chiffre)
+
+$invite = "Entrez un nombre : ";
+CreerTableauAvecInvite($invite);
+
+function afficher_tableau_2d_plateau($nbLigne, $nbColonne) {
+    $barreSeparation = "|";
+    // Afficher les entêtes de colonnes
+    traits($nbColonne);
+    echo $barreSeparation;
+    echo "     "; 
+    for ($col = 0; $col < $nbColonne; $col++) {
+        echo $barreSeparation;
+        echo "  ";
+        echo chr(65 + $col) . "  "  ;
+    }
+    echo $barreSeparation;
+    echo "\n";
+
+    for ($row = 1; $row <= $nbLigne; $row++) {
+        traits($nbColonne);
+        echo $barreSeparation;
+        echo str_pad($row, 3, ' ', STR_PAD_LEFT); 
+        echo "  ";
+        for ($col = 0; $col < $nbColonne; $col++) {
+            echo $barreSeparation;
+            echo "     ";
+        }   
+        echo $barreSeparation;
+        echo "\n";
+    }
+    traits($nbColonne);
+}
+
+function rechercher_valeur($valeur, $nbLigne, $nbColonne) {
+    $valeur = strtoupper($valeur);
+    for ($row = 1; $row <= $nbLigne; $row++) {
+        for ($col = 0; $col < $nbColonne; $col++) {
+            if ($valeur === chr(65 + $col) . $row) {
+                return "La valeur $valeur a été trouvée à la position ($row, " . chr(65 + $col) . ").\n";
+            }
+        }
+    }
+    return "La valeur $valeur n'a pas été trouvée dans le plateau.\n";
+}
+
+$nbLigne = readline("Entrez le nombre de lignes : ");
+$nbColonne = readline("Entrez le nombre de colonnes : ");
+
+afficher_tableau_2d_plateau($nbLigne, $nbColonne);
+
+$valeurRecherche = readline("Entrez la valeur à rechercher (par exemple, A1) : ");
+echo rechercher_valeur($valeurRecherche, $nbLigne, $nbColonne);
+
+function traits($nbcolonne)
 {
-    for ($j = 0; $j < $chiffre; $j++) {
+    for ($j = 0; $j < $nbcolonne * 2; $j++) {
 
         echo "----";
     }
