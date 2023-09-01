@@ -1,0 +1,36 @@
+generer mot
+
+demander nombre joueur 
+
+choisir ordre de passage
+
+choisir difficulté : affichage mot 
+		     affichage erreur  
+
+affichage mot 
+
+affichage tentative 
+
+
+debuter partie (selon ordre passage)
+
+j1 : propose lettre => si bon : selon facile : afficher la lettre autant de fois que possible + stock lettre dans tableau 
+		       si faux : selon facile : retire une tentative + stock lettre dans tableau + 
+			si dèja proposé : message erreur + rejoué (perd pas de vie)
+
+      ou proposer mot => si bon : fin de partie victoire
+			si faux : 1 tentative perdu
+
+
+
+
+joueur suivant
+
+
+j2 : propose lettre => si bon : selon facile : afficher la lettre autant de fois que possible + stock lettre dans tableau
+		       si faux : selon facile : retire une tentative + stock lettre dans tableau 
+			si dèja proposé : message erreur  + rejoué (perd pas de vie)
+
+
+
+

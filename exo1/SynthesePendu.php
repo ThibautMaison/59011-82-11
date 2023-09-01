@@ -9,8 +9,11 @@ function init(){
     $difficulte = saisirDifficulte();
     $nbJoueur = saisirNbJoueur();
     $nbVie = saisirNbVie();
-    return ["motAChercher" => $motAChercher, "difficulte" => $difficulte, "nbJoueur" => $nbJoueur, "nbVie" => $nbVie];
-    jeu($motAChercher,$difficulte,$nbJoueur,$nbVie);
+    echo $difficulte;
+    echo $nbJoueur;
+    echo $nbVie;
+    echo $motAChercher;
+    Jeu($motAChercher,$difficulte,$nbJoueur,$nbVie);
 }
 
 /**
@@ -69,7 +72,7 @@ function jeu($motAChercher,$difficulte,$nbJoueur,$nbVie){
     while(estGagne($motCode) == 0 && $nbVie > 0){
         affichageGlobal($nbVie,$motCode,$joueurEnCours,$propositions);
         $lettre = saisirLettre($joueurEnCours);
-        verifierLettre($lettre,$motCode,$motAChercher,$difficulte,$propositions);
+        verifierLettre($lettre,$motCode,$motAChercher,$difficulte,$propositions,$nbVie);
         $propositions .= $lettre." ";
         $joueurEnCours = joueurSuivant($nbJoueur,$joueurEnCours);
     }
@@ -84,9 +87,6 @@ function jeu($motAChercher,$difficulte,$nbJoueur,$nbVie){
  * @param integer $difficulte Difficulté de la partie indiquée
  * @return array Le tableau du mot
  */
-// niveau facile je veux que le mot soit afficher en entier avec des _ pour les lettres sauf la premiere et derniere lettre
-// niveau moyen je veux que le mot soit afficher en entier avec des _ pour les lettres sauf la premiere lettre
-// niveau difficile je veux que le mot soit afficher en entier avec des _ pour les lettres
 function coderMot(string $mot, int $difficulte){
     $motCode = [];
     if($difficulte == 1){
@@ -160,10 +160,19 @@ function saisirLettre(int $joueurEnCours){
 
  // niveau facile je veux que toute les lettres soit ajouté au mot codé si elle est dans le mot a trouver 
  // niveau moyen je veux que seulement une lettre soit ajouté au mot codé si elle est dans le mot a trouver
-function verifierLettre(string $lettre, array $motCode, string $mot, int $difficulte, string $propositions){
+function verifierLettre(string $lettre, array $motCode, string $mot, int $difficulte, string $propositions, int $nbVie){
+    $propositions = stockLettreProposer($lettre,$propositions);
+    // comparer $propositions avec $lettre
+    if(estCorrecte($lettre,$motCode,$mot)){
+        $motCode = ajouterLettre($lettre,$motCode,$mot,$difficulte);
+    }else{
+        $nbVie--;
+    }
 }
 
 function stockLettreProposer(string $lettre, string $propositions){
+    $propositions .= $lettre." ";
+    return $propositions;
 }
 
 /**
@@ -191,15 +200,18 @@ function estCorrecte(string $lettre, array $motcode, string $mot){
  * @param integer $difficulte
  * @return array Le mot codé
  */
+// niveau facile je veux que toute les lettres soit ajouté au mot codé si elle est dans le mot a trouver
+// niveau moyen je veux que seulement une lettre soit ajouté au mot codé si elle est dans le mot a trouver
+// niveau difficile je veux que la lettre soit ajouté au mot codé si elle est dans le mot a trouver
 function ajouterLettre(string $lettre, array $motcode, string $mot, int $difficulte){
-    if($difficulte == 1){
-        for($i = 0; $i < strlen($mot); $i++){
+    if($difficulte <= 1){
+        for($i = 0; $i < count($motcode); $i++){
             if($mot[$i] == $lettre){
                 $motcode[$i] = $lettre;
             }
         }
     }else{
-        $motcode[array_search($lettre,str_split($mot))] = $lettre;
+        $motcode[array_search("_",$motcode)] = $lettre;
     }
     return $motcode;
 }
@@ -261,3 +273,5 @@ function conclusion($resultat){
         echo "Perdu\n";
     }
 }
+
+init();

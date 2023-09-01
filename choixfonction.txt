@@ -1,0 +1,36 @@
+INIT 
+____________________________________________
+generer mot
+demande nombre de joueur
+choix ordre de passage
+choix difficulté : modification mot : totalement / partiellement masquer en fonction de la difficulté 
+		   affichage erreur lettre utilisée 
+affichage mot
+affichage pendu / tentative
+____________________________________________
+DEBUT DE PARTIE
+
+joueur selectionné
+
+saisie lettre 
+
+analyser lettre
+
+nombre d'occurence lettre
+
+stock lettre
+
+proposition mot
+
+analyse mot 
+
+joueur suivant 
+
+_____________________________________________
+FIN DE PARTIE 
+
+victoire 
+
+defaite
+
+

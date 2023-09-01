@@ -1,0 +1,56 @@
+=>proposer une partie
+
+
+
+fonction debut parti
+=>debuter la partie 
+=>trouver un mot a faire deviner
+=>la stocker dans une variable
+
+=>afficher le mot avec seulement la premier et derniere lettre pour les personnes devant trouver le mot entier (grace a une fonction)
+
+=>mettre un limite de 10erreur pour trouver entierement le mot mais le mot peut etre trouver avant si le mot a été deviner avant les 10 propositions
+on peut generer un schema de 10 etapes pour rentre la chose plus visuel sinon juste mettre le nombre de chance restant(fonction)
+
+
+=>demander le nombre de personne qui participe au jeu et rentrer leur nom
+=>choisir dans quel odre les personnes commence en triant aleatoirement les noms de participant
+
+=>afficher lordre de passage et demarrer un do while en demandant la proposition des joueurs chacun leur tour
+
+""""""""""""""""""""""""""""""niveau 1"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+=>joueur 1 propose un lettre => si la lettre existe alors afficher toute les lettres dans le mot similaire a la proposition en plus des lettres deja trouver mais en plus de ca stocker la lettre *
+qu'il a proposer dans un tableau comme ca lors des tours suivant si quelqu'un redit la lettre un message apparait pour lui dire que ca a deja été dit et cette meme personne a 
+le droit de reproposer une lettre  => sinon demarrer le schema/diminuer le nombre chance restant
+=>joueur 2 propose un lettre => si la lettre existe alors afficher toute les lettres dans le mot similaire a la proposition en plus des lettres deja trouver mais en plus de ca stocker la lettre *
+qu'il a proposer dans un tableau comme ca lors des tours suivant si quelqu'un redit la lettre un message apparait pour lui dire que ca a deja été dit et cette meme personne a 
+le droit de reproposer une lettre  => sinon demarrer le schema/diminuer le nombre chance restant
+
+""""""""""""""""""""""""""""""niveau 2"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+=>joueur 1 propose un lettre => si la lettre existe alors reveler seulement une lettre (meme sil y en a plusieurs dans le mot choisi)(toujours reveler les lettres de gauche a droite s'il y en a plusieur dans le mot)
+ correspondant a la propostion sur le mot en plus des lettres deja trouver  => sinon demarrer 
+le schema/diminuer le nombre chance restant
+=>joueur 2 propose un lettre => si la lettre existe alors reveler seulement une lettre (meme sil y en a plusieurs dans le mot choisi)(toujours reveler les lettres de gauche a droite s'il y en a plusieur dans le mot)
+ correspondant a la propostionsur le mot en plus des lettres deja trouver  => sinon demarrer 
+le schema/diminuer le nombre chance restant
+etc etc etc
+
+
+
+""""""""""""""""""""""""""""""niveau 3"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+=>joueur 1 propose un lettre => si la lettre existe alors lafficher sur le mot en plus des lettres deja trouver mais en plus de ca stocker la lettre qu'il a proposer dans un tableau comme ca lors des tours 
+suivant si quelqu'un redit la lettre un message apparait pour lui dire que ca a deja été dit et cette meme personne a le droit de reproposer une lettre=> sinon demarrer le schema/diminuer le nombre chance 
+restant et passer au joueur suivant 
+=>joueur 2 propose un lettre => si la lettre existe alors lafficher sur le mot en plus des lettres deja trouver mais en plus de ca stocker la lettre qu'il a proposer dans un tableau comme ca lors des tours 
+suivant si quelqu'un redit la lettre un message apparait pour lui dire que ca a deja été dit et cette meme personne a le droit de reproposer une lettre=> sinon demarrer le schema/diminuer le nombre chance 
+restant et passer au joueur suivant 
+etc etc etc
+
+
+
+=>pouvoir proposer le mot entier directement si une personne a trrouver la reponse mais parcontre si la personne se trompe dans le mot donner alors il y a une chance en moins dan les propositions aussi
+=>si les 10 erreur est atteinte alors ecrire defaite tout en revelant le mot choisi au depart
+=>si toutes les lettres on etait trouver pour le mot ou que une propositions de mot a été faites,qu'elle correspond au mot de dapart alors le jeu s'arrete et ecrit victoire
+=>proposer une nouvelle partie 
+
+
